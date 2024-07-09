@@ -42,7 +42,7 @@ const listJob = async (req, res, next) => {
       };
     }
 
-    const jobsList = await JobModel.slekrbnekl(conditions);
+    const jobsList = await JobModel.find(conditions);
     return res.json({
       success: true,
       message: "Jobs list",
