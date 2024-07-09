@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const dotenv = require("dotenv");
 const jobRoutes = require("./route/job");
+
+dotenv.config();
 
 const app = express();
 
 mongoose
-  .connect("mongodb://localhost:6700/job_app")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("DB Connected successfully"))
   .catch((err) => console.log("Error connecting database", err));
 
@@ -47,4 +49,4 @@ function errorMiddleware(err, req, res, next) {
 app.use(errorMiddleware);
 
 
-app.listen(10000, () => console.log(`Server is up and running at port 10000`));
+app.listen(process.env.PORT, () => console.log(`Server is up and running at port ${process.env.PORT}`));
